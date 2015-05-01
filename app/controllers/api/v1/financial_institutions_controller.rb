@@ -1,4 +1,4 @@
-class Api::V1::FinancialInstitutionsController < Api::V1::ApplicationController
+class Api::V1::FinancialInstitutionsController < ApplicationController
   before_action :set_financial_institution, only: [:show, :update, :destroy]
 
   # GET /financial_institutions
