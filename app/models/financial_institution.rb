@@ -4,4 +4,5 @@ class FinancialInstitution < ActiveRecord::Base
   validates :org, uniqueness: true, presence: true
   validates :url, uniqueness: true, presence: true
   has_many :credentials
+  has_many :accounts
 end

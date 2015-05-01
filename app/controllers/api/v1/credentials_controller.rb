@@ -1,4 +1,4 @@
-class Api::V1::CredentialsController < ApplicationController
+class Api::V1::CredentialsController < Api::V1::ApplicationController
   before_action :set_credential, only: [:show, :update, :destroy]
 
   # GET /credentials

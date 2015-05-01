@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501120507) do
+ActiveRecord::Schema.define(version: 20150501121849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "financial_institution_id"
+    t.string   "reference"
+    t.string   "account_type"
+    t.string   "status"
+    t.integer  "credential_id"
+    t.decimal  "available_balance"
+    t.decimal  "posted_balance"
+    t.datetime "last_synced_at"
+    t.datetime "balance_as_of_date"
+    t.string   "description"
+    t.string   "bankid"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "accounts", ["credential_id"], name: "index_accounts_on_credential_id", using: :btree
+  add_index "accounts", ["financial_institution_id"], name: "index_accounts_on_financial_institution_id", using: :btree
+  add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
   create_table "credentials", force: :cascade do |t|
     t.binary   "encrypted_password"
@@ -53,6 +74,9 @@ ActiveRecord::Schema.define(version: 20150501120507) do
     t.string   "authentication_token"
   end
 
+  add_foreign_key "accounts", "credentials"
+  add_foreign_key "accounts", "financial_institutions"
+  add_foreign_key "accounts", "users"
   add_foreign_key "credentials", "financial_institutions"
   add_foreign_key "credentials", "users"
 end
