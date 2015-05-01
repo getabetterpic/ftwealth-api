@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501005247) do
+ActiveRecord::Schema.define(version: 20150501113031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "financial_institutions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "fid"
+    t.string   "org"
+    t.string   "url"
+    t.date     "last_ofx_validation"
+    t.date     "last_ssl_validation"
+    t.text     "ofx_template"
+    t.string   "sync_type"
+    t.string   "sync_class"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "financial_institutions", ["fid"], name: "index_financial_institutions_on_fid", using: :btree
+  add_index "financial_institutions", ["name"], name: "index_financial_institutions_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
