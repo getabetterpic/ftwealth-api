@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501113031) do
+ActiveRecord::Schema.define(version: 20150501120507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "credentials", force: :cascade do |t|
+    t.binary   "encrypted_password"
+    t.binary   "encrypted_username"
+    t.integer  "financial_institution_id"
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "credentials", ["financial_institution_id"], name: "index_credentials_on_financial_institution_id", using: :btree
+  add_index "credentials", ["user_id"], name: "index_credentials_on_user_id", using: :btree
 
   create_table "financial_institutions", force: :cascade do |t|
     t.string   "name"
@@ -41,4 +53,6 @@ ActiveRecord::Schema.define(version: 20150501113031) do
     t.string   "authentication_token"
   end
 
+  add_foreign_key "credentials", "financial_institutions"
+  add_foreign_key "credentials", "users"
 end
