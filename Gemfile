@@ -18,6 +18,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
   gem 'guard-rails'
+  gem 'shoulda-matchers'
 end
 
 
