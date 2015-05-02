@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502113801) do
+ActiveRecord::Schema.define(version: 20150502114245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20150502113801) do
 
   add_index "financial_institutions", ["fid"], name: "index_financial_institutions_on_fid", using: :btree
   add_index "financial_institutions", ["name"], name: "index_financial_institutions_on_name", using: :btree
+
+  create_table "scheduled_transactions", force: :cascade do |t|
+    t.boolean  "recurring"
+    t.integer  "day_of_month"
+    t.boolean  "paycheck",     default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
 
   create_table "trans", force: :cascade do |t|
     t.decimal  "amount"

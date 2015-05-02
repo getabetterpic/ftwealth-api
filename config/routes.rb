@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :scheduled_transactions, except: [:new, :edit]
   resources :trans, except: [:new, :edit]
   namespace :api do
     namespace :v1 do
