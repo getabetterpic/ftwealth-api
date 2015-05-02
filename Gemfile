@@ -9,6 +9,7 @@ gem 'pg'
 gem 'awesome_print'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'thin'
+gem 'active_record-acts_as'
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
