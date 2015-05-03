@@ -1,4 +1,4 @@
-class ScheduledTransactionsController < ApplicationController
+class Api::V1::ScheduledTransactionsController < Api::V1::ApplicationController
   before_action :set_scheduled_transaction, only: [:show, :update, :destroy]
 
   # GET /scheduled_transactions

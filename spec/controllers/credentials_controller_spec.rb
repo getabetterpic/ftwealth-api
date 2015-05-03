@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe CredentialsController, type: :controller do
+RSpec.describe Api::V1::CredentialsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Credential. As you add validations to Credential, be sure to
@@ -49,13 +49,6 @@ RSpec.describe CredentialsController, type: :controller do
       credential = Credential.create! valid_attributes
       get :show, {:id => credential.to_param}, valid_session
       expect(assigns(:credential)).to eq(credential)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new credential as @credential" do
-      get :new, {}, valid_session
-      expect(assigns(:credential)).to be_a_new(Credential)
     end
   end
 

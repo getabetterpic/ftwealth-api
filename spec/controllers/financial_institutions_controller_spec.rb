@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe FinancialInstitutionsController, type: :controller do
+RSpec.describe Api::V1::FinancialInstitutionsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # FinancialInstitution. As you add validations to FinancialInstitution, be sure to
@@ -49,13 +49,6 @@ RSpec.describe FinancialInstitutionsController, type: :controller do
       financial_institution = FinancialInstitution.create! valid_attributes
       get :show, {:id => financial_institution.to_param}, valid_session
       expect(assigns(:financial_institution)).to eq(financial_institution)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new financial_institution as @financial_institution" do
-      get :new, {}, valid_session
-      expect(assigns(:financial_institution)).to be_a_new(FinancialInstitution)
     end
   end
 

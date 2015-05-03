@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe AccountsController, type: :controller do
+RSpec.describe Api::V1::AccountsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Account. As you add validations to Account, be sure to
@@ -49,13 +49,6 @@ RSpec.describe AccountsController, type: :controller do
       account = Account.create! valid_attributes
       get :show, {:id => account.to_param}, valid_session
       expect(assigns(:account)).to eq(account)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new account as @account" do
-      get :new, {}, valid_session
-      expect(assigns(:account)).to be_a_new(Account)
     end
   end
 

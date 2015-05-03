@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe ScheduledTransactionsController, type: :controller do
+RSpec.describe Api::V1::ScheduledTransactionsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # ScheduledTransaction. As you add validations to ScheduledTransaction, be sure to
@@ -49,13 +49,6 @@ RSpec.describe ScheduledTransactionsController, type: :controller do
       scheduled_transaction = ScheduledTransaction.create! valid_attributes
       get :show, {:id => scheduled_transaction.to_param}, valid_session
       expect(assigns(:scheduled_transaction)).to eq(scheduled_transaction)
-    end
-  end
-
-  describe "GET #new" do
-    it "assigns a new scheduled_transaction as @scheduled_transaction" do
-      get :new, {}, valid_session
-      expect(assigns(:scheduled_transaction)).to be_a_new(ScheduledTransaction)
     end
   end
 

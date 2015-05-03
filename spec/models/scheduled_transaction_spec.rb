@@ -7,6 +7,8 @@ RSpec.describe ScheduledTransaction, type: :model do
   it { should validate_numericality_of :day_of_month }
   it { should validate_numericality_of :amount }
   it { should validate_inclusion_of(:day_of_month).in_range(1..31) }
+  it { should have_many :ofx_transactions }
+  it { should belong_to :account }
 
   it 'sets the default recurring and paycheck attributes correctly' do
     # These are set via database defaults

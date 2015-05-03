@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-FinancialInstitution.create(
+fi = FinancialInstitution.create(
   name: 'Capital One 360',
   fid:  '031176110',
   org:  'ING DIRECT',

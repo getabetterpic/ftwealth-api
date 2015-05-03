@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503132155) do
+ActiveRecord::Schema.define(version: 20150503140311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,20 @@ ActiveRecord::Schema.define(version: 20150503132155) do
   add_index "financial_institutions", ["fid"], name: "index_financial_institutions_on_fid", using: :btree
   add_index "financial_institutions", ["name"], name: "index_financial_institutions_on_name", using: :btree
 
+  create_table "ofx_transactions", force: :cascade do |t|
+    t.decimal  "amount"
+    t.string   "description"
+    t.datetime "ofx_date"
+    t.integer  "ofx_id"
+    t.integer  "scheduled_transaction_id"
+    t.integer  "account_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "ofx_transactions", ["account_id"], name: "index_ofx_transactions_on_account_id", using: :btree
+  add_index "ofx_transactions", ["scheduled_transaction_id"], name: "index_ofx_transactions_on_scheduled_transaction_id", using: :btree
+
   create_table "scheduled_transactions", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "description"
@@ -74,7 +88,10 @@ ActiveRecord::Schema.define(version: 20150503132155) do
     t.hstore   "properties",   default: {"paycheck"=>"false", "recurring"=>"false"}
     t.datetime "created_at",                                                         null: false
     t.datetime "updated_at",                                                         null: false
+    t.integer  "account_id"
   end
+
+  add_index "scheduled_transactions", ["account_id"], name: "index_scheduled_transactions_on_account_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -89,4 +106,7 @@ ActiveRecord::Schema.define(version: 20150503132155) do
   add_foreign_key "accounts", "users"
   add_foreign_key "credentials", "financial_institutions"
   add_foreign_key "credentials", "users"
+  add_foreign_key "ofx_transactions", "accounts"
+  add_foreign_key "ofx_transactions", "scheduled_transactions"
+  add_foreign_key "scheduled_transactions", "accounts"
 end
