@@ -4,7 +4,7 @@ class CreateScheduledTransactions < ActiveRecord::Migration
       t.decimal :amount
       t.string :description
       t.integer :day_of_month
-      t.hstore :properties
+      t.hstore :properties, default: {recurring: false, paycheck: false}
 
       t.timestamps null: false
     end

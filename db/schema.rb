@@ -71,9 +71,9 @@ ActiveRecord::Schema.define(version: 20150503132155) do
     t.decimal  "amount"
     t.string   "description"
     t.integer  "day_of_month"
-    t.hstore   "properties"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.hstore   "properties",   default: {"paycheck"=>"false", "recurring"=>"false"}
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
   end
 
   create_table "users", force: :cascade do |t|
