@@ -6,13 +6,18 @@ class ScheduledTransaction < ActiveRecord::Base
   has_many :ofx_transactions
   belongs_to :account
 
-  def paycheck
-    return (super == 'true') if %w{true false}.include? super
-    super
-  end
+  PROPERTIES = [
+    'paycheck',
+    'recurring'
+  ]
 
-  def recurring
-    return (super == 'true') if %w{true false}.include? super
-    super
+  PROPERTIES.each do |prop|
+    define_method(prop) do
+      if read_attribute(prop) == 'true'
+        true
+      else
+        false
+      end
+    end
   end
 end
