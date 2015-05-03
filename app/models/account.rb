@@ -5,4 +5,5 @@ class Account < ActiveRecord::Base
   has_many :ofx_transactions
   has_many :scheduled_transactions
   validates_presence_of :credential_id, :user_id, :financial_institution_id
+  validates :reference, uniqueness: { scope: :financial_institution }
 end
