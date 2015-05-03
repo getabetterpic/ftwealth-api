@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503140311) do
+ActiveRecord::Schema.define(version: 20150503183512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,22 @@ ActiveRecord::Schema.define(version: 20150503140311) do
   add_index "financial_institutions", ["fid"], name: "index_financial_institutions_on_fid", using: :btree
   add_index "financial_institutions", ["name"], name: "index_financial_institutions_on_name", using: :btree
 
+  create_table "ofx_calls", force: :cascade do |t|
+    t.text     "original_document"
+    t.datetime "requested_date"
+    t.decimal  "dtacctup"
+    t.string   "trnuid"
+    t.decimal  "available_balance"
+    t.decimal  "posted_balance"
+    t.integer  "account_id"
+    t.integer  "financial_institution_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "ofx_calls", ["account_id"], name: "index_ofx_calls_on_account_id", using: :btree
+  add_index "ofx_calls", ["financial_institution_id"], name: "index_ofx_calls_on_financial_institution_id", using: :btree
+
   create_table "ofx_transactions", force: :cascade do |t|
     t.decimal  "amount"
     t.string   "description"
@@ -106,6 +122,8 @@ ActiveRecord::Schema.define(version: 20150503140311) do
   add_foreign_key "accounts", "users"
   add_foreign_key "credentials", "financial_institutions"
   add_foreign_key "credentials", "users"
+  add_foreign_key "ofx_calls", "accounts"
+  add_foreign_key "ofx_calls", "financial_institutions"
   add_foreign_key "ofx_transactions", "accounts"
   add_foreign_key "ofx_transactions", "scheduled_transactions"
   add_foreign_key "scheduled_transactions", "accounts"
