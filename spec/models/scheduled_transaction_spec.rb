@@ -11,7 +11,7 @@ RSpec.describe ScheduledTransaction, type: :model do
   it 'sets the default recurring and paycheck attributes correctly' do
     # These are set via database defaults
     @tran = ScheduledTransaction.new
-    expect(@tran.recurring).to eq("false")
-    expect(@tran.paycheck).to eq("false")
+    expect(@tran.recurring).to eq(false)
+    expect(@tran.paycheck).to eq(false)
   end
 end
