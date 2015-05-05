@@ -1,4 +1,5 @@
-class Api::V1::FinancialInstitutionsController < ApplicationController
+class Api::V1::FinancialInstitutionsController < Api::V1::ApplicationController
+  skip_before_filter :restrict_access, only: :index
   before_action :set_financial_institution, only: [:show, :update, :destroy]
 
   # GET /financial_institutions
