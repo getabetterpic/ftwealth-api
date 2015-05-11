@@ -28,6 +28,12 @@ class Credential < ActiveRecord::Base
     encrypt(string, passkey)
   end
 
+  def request_account_info(passkey)
+    userid = username(passkey)
+    userpass = password(passkey)
+    RequestOfx.request_acct_info(financial_institution, self.user, userid, userpass, self)
+  end
+
   protected
 
     def encrypt(string, passkey)

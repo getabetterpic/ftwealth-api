@@ -5,7 +5,7 @@ class Api::V1::ApplicationController < ApplicationController
   private
     def restrict_access
       authenticate_or_request_with_http_token do |token, options|
-        User.find_by_email_and_authorization_token(options[:email], token)
+        User.find_by(email: options[:email], authentication_token: token)
       end
     end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/users/sign_in' => 'sessions#create'
   namespace :api do
     namespace :v1 do
       resources :financial_institutions, except: [:new, :edit]

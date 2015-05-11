@@ -3,4 +3,5 @@ class AccountSerializer < ActiveModel::Serializer
   has_one :user
   has_one :financial_institution
   has_one :credential
+  root :accounts
 end

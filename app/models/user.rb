@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     user = User.find_by_email(email)
     unless user && user.authenticate(password)
-      rails "Email or password invalid"
+      return "Email or password invalid"
     end
     user
   end
