@@ -4,7 +4,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = current_user.accounts.all
 
     render json: @accounts
   end
@@ -18,7 +18,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
+    @account = current_user.accounts.new(account_params)
 
     if @account.save
       render json: @account, status: :created, location: @account
@@ -30,7 +30,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    @account = Account.find(params[:id])
+    @account = current_user.accounts.find(params[:id])
 
     if @account.update(account_params)
       head :no_content
@@ -50,7 +50,7 @@ class Api::V1::AccountsController < Api::V1::ApplicationController
   private
 
     def set_account
-      @account = Account.find(params[:id])
+      @account = current_user.accounts.find(params[:id])
     end
 
     def account_params
