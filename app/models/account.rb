@@ -22,4 +22,28 @@ class Account < ActiveRecord::Base
   def monthly_average_expenses
     ofx_transactions.where("ofx_date > ?", 6.months.ago).where("amount < 0").sum(:amount) / 6
   end
+
+  def monthly_average_income
+    ofx_transactions.where("ofx_date > ?", 6.months.ago).where("amount > 0").sum(:amount) / 6
+  end
+
+  def average_expenses_left_for_month
+    daily_average_expenses * days_left_in_month
+  end
+
+  def average_income_left_for_month
+    daily_average_income * days_left_in_month
+  end
+
+  def daily_average_expenses
+    monthly_average_expenses / Time.days_in_month(Date.today.month)
+  end
+
+  def daily_average_income
+    monthly_average_income / Time.days_in_month(Date.today.month)
+  end
+
+  def days_left_in_month
+    (Time.days_in_month(Date.today.month) - Date.today.day)
+  end
 end
