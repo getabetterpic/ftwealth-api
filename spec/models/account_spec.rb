@@ -6,6 +6,7 @@ RSpec.describe Account, type: :model do
   it { should belong_to :credential }
   it { should have_many :ofx_transactions }
   it { should have_many :scheduled_transactions }
+  it { should have_many :ofx_calls }
   it { should validate_presence_of :credential_id }
   it { should validate_presence_of :user_id }
   it { should validate_presence_of :financial_institution_id }

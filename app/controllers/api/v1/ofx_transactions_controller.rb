@@ -4,9 +4,16 @@ class Api::V1::OfxTransactionsController < Api::V1::ApplicationController
   # GET /ofx_transactions
   # GET /ofx_transactions.json
   def index
-    @ofx_transactions = OfxTransaction.all
+    if params[:account_id]
+      @ofx_transactions = current_user
+        .accounts.find(params[:account_id]).ofx_transactions
+          .order("ofx_date DESC")
+    else
+      @ofx_transactions = current_user.ofx_transactions.order("ofx_id DESC")
+    end
+    @ofx_transactions = @ofx_transactions.all
 
-    render json: @ofx_transactions
+    render json: @ofx_transactions, root: 'transactions'
   end
 
   # GET /ofx_transactions/1
